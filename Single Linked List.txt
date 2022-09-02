@@ -1,0 +1,226 @@
+import java.io.*;
+import java.util.Scanner;
+class SingleLinked{
+	
+	class Node{
+		int data;
+		Node link;
+		public Node(int data) {
+			this.data=data;
+			this.link=null;
+		}
+	}
+	Node p=null;
+	Node start=null;
+	
+	//Count number of nodes
+	public int countNode() {
+		Node p=start;
+		int c=0;
+		if(start==null)
+			return 0;
+		while(p!=null) {
+			p=p.link;
+			c++;
+		}
+		return c;
+	}
+	
+	//Insert Node
+	public void insertNode(int data) {
+		
+		Node temp=new Node(data);
+		if(start==null) {
+			start=temp;
+			p=temp;
+			
+		}else {
+			p.link=temp;
+			p=temp;
+		}
+		System.out.println();
+	}
+	
+	//Insert At Beginning
+	public void insertAtBegin(int data) {
+		Node temp=new Node(data);
+		if(start==null) {
+			start=temp;
+			p=temp;
+		}
+		else {
+			temp.link=start;
+			start=temp;
+		}
+	}
+	
+	//Insert At End
+	public void insertAtEnd(int data) {
+		Node temp=new Node(data);
+		
+		while(p.link!=null) {
+			p=p.link;
+		}
+		p.link=temp;
+		p=temp;
+	}
+	
+	//Insert after node
+	public void insertAfterNode(int x,int data) {
+		Node temp=new Node(data);
+		Node p=start;
+		while(p!=null) {
+			if(p.data==x)
+				break;
+			p=p.link;
+		}
+		temp.link=p.link;
+		p.link=temp;
+	}
+	
+	//Delete First Node
+	public void deleteFirstNode() {
+		if(start==null)
+			return ;
+		else if(start.link==null)
+			start=null;
+		else start=start.link;
+	}
+	
+	//Delete Last Node
+	public void deleteLastNode() {
+		Node p=start;
+		if(start==null)
+			return;
+		else if(start.link==null)
+			start=null;
+		else {
+		while(p.link.link!=null) {
+			p=p.link;
+		}
+		p.link=null;
+	  }
+	}
+	
+	//Delete  Specific node
+	public void deleteSpecificNode(int data) {
+		Node p=start;
+		while(p.link!=null) {
+			if(p.link.data==data)
+				break;
+			p=p.link;
+		}
+		p.link=p.link.link;
+	}
+	
+	//Reverse a linked list
+	public void reverse() {
+		Node p,prev,next;
+		 p=start;
+		 prev=null;
+		while(p!=null) {
+			
+			next=p.link;
+			p.link=prev;
+			prev=p;
+			p=next;
+			
+			
+			
+		}
+		start=prev;
+	}
+	
+	//Display List
+	public void display() {
+		Node p=start;
+		if(start==null) {
+			return ;
+		}
+		while(p!=null) {
+			System.out.print(p.data+" ");
+			
+			p=p.link;
+			
+		}
+		
+	}
+	
+	//Main Method
+	public static void main(String args[]) {
+		
+		Scanner sc=new Scanner(System.in);
+		int choice,data,x;
+		SingleLinked sList=new SingleLinked();
+		
+		while(true) {
+			
+			System.out.println();
+			System.out.println("****** Menu ******");
+			System.out.println("1: Insert node");
+			System.out.println("2: Insert at Begining");
+			System.out.println("3: Insert at end");
+			System.out.println("4: Delete first Node");
+			System.out.println("5: Delete last Node");
+			System.out.println("6: Enter Node to be deleted");
+			System.out.println("7: Enter node to be inserted after specific node");
+			System.out.println("8: Display List");
+			System.out.println("9: Count node");
+			System.out.println("10: Reverse a linked list");
+			System.out.println("Enter your choice");
+			choice=sc.nextInt();
+	        
+			switch(choice) {
+			
+			case 1: System.out.println("Enter node to be inserted");
+			        data=sc.nextInt();
+			        sList.insertNode(data);
+			        break;
+			        
+			case 2: System.out.println("Enter the node to be inserted");
+			        data=sc.nextInt();
+			        sList.insertAtBegin(data);
+			        break;
+			        
+			case 3: System.out.println("Enter the node");
+			        data=sc.nextInt();
+			        sList.insertAtEnd(data);
+			        break;
+			        
+			case 4: sList.deleteFirstNode();
+			        break;
+			        
+			case 5: sList.deleteLastNode();
+			        break;
+			        
+			case 6: System.out.println("Enter the node to be deleted");
+			        data=sc.nextInt();
+			        sList.deleteSpecificNode(data);
+			        break;
+			        
+			case 7: System.out.println("Enter the node to be inserted");
+			        data=sc.nextInt();
+			        System.out.println("Enter the node after which new node is inserted");
+			        x=sc.nextInt();
+			        sList.insertAfterNode(x,data);
+			        break;
+			        
+			case 8: System.out.print("List : ");
+				    sList.display();
+			        break;
+			        
+			case 9: System.out.println("Number of nodes: "+sList.countNode());
+			        break;
+			        
+			case 10: sList.reverse();
+			         break;
+			         
+			default:System.out.println("Enter valid choice");
+			
+			}
+			
+			
+			
+		}
+	}
+}
