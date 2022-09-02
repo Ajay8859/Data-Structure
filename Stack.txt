@@ -1,0 +1,122 @@
+import java.io.*;
+import java.util.EmptyStackException;
+import java.util.Scanner;
+class Pstack{
+	
+	int StackArray[];
+	int top=-1;
+	public Pstack(int n) {
+		StackArray=new int [n];
+		
+	}
+	
+	//Stack is empty
+	public boolean isEmpty() {
+	    
+		return (top==-1);
+	}
+	
+	//Stack is full
+	public boolean isFull() {
+		
+		return (top==StackArray.length-1);
+	}
+	
+	//Inserting into stack
+	public void push(int data) {
+		
+		if(isFull()) {
+			
+			System.out.println("Stack Overflow");
+			return ;
+		}
+		top++;
+		StackArray[top]=data;
+	}
+	
+	//Deleting an element
+	public void pop() {
+		
+		if(isEmpty()) {
+			System.out.println("Stack Underflow");
+			throw new EmptyStackException();
+		}
+		top--;
+	}
+	
+	//Return top element
+	public int peek() {
+		
+		if(isEmpty()) {
+			System.out.println("Stack is Underflow");
+			throw new EmptyStackException();
+		}
+		int x=StackArray[top];
+		return x;
+		
+	}
+	
+	//Display Method
+	public void display() {
+		
+		if(isEmpty()) {
+			System.out.println("Stack Underflow");
+			throw  new EmptyStackException();
+		}
+		for(int i=0;i<=top;i++) {
+			System.out.print(StackArray[i]+" ");
+			
+		}
+	}
+	
+	//Main Method
+	public static void main(String args[]) {
+		
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the size of array");
+		int n=sc.nextInt();
+		Pstack sStack=new Pstack(n);
+		int choice,data;
+		
+		while(true) {
+			System.out.println("****** Menu ******");
+			System.out.println("1: Push an element");
+			System.out.println("2: Pop an element");
+			System.out.println("3: Peek element");
+			System.out.println("4: Display all stack element");
+			System.out.println("5: Quit");
+			System.out.println("Enter your choice");
+			choice=sc.nextInt();
+			if(choice==5)
+				break;
+			
+			switch(choice) {
+			
+			
+			case 1: System.out.println("Enter the element to be inserted");
+			        data=sc.nextInt();
+			        sStack.push(data);
+			        break;
+			        
+			case 2: sStack.pop();
+			        break;
+			        
+			case 3: System.out.println("Top element is: "+sStack.peek());
+			        break;
+			        
+			case 4: sStack.display();
+			        break;
+			        
+			default: System.out.println("Invalid choice");
+			
+			        
+			        
+			
+			}
+		}
+		
+		
+		
+	}
+	
+}
