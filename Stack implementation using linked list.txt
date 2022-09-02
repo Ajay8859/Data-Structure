@@ -1,0 +1,119 @@
+import java.io.*;
+import java.util.Scanner;
+class Stack{
+	
+	
+	class Node{
+		
+		int data;
+		Node link;
+		public Node(int data) {
+			this.data=data;
+			link=null;
+		}
+	}
+	
+	Node start=null;
+	Node p=null;
+	
+	
+	//Inserting an element
+	public void push(int data) {
+		
+		Node temp=new Node(data);
+		
+		if(start==null) {
+			start=temp;
+			p=temp;
+			
+		}else {
+			p.link=temp;
+			p=temp;
+		}
+	}
+	
+	//Delete an element
+	public void pop() {
+		
+		Node p=start;
+		while(p.link.link!=null) {
+			
+			p=p.link;
+		}
+		p.link=null;
+	}
+	
+	//Peek element 
+	public int peek() {
+		
+		Node p=start;
+		if(start==null) {
+			return 0;
+		}
+		while(p.link!=null) {
+			
+			p=p.link;
+		}
+		int x=p.data;
+		return x;
+	}
+	
+	//Display
+	public void display() {
+		Node p=start;
+		if(start==null) {
+			return ;
+		}
+		while(p!=null) {
+			
+			System.out.print(p.data+" ");
+			p=p.link;
+		}
+		System.out.println();
+	
+	}
+	
+	//Main Method
+	public static void main(String args[]) {
+		
+		Scanner sc=new Scanner(System.in);
+		Stack sList=new Stack();
+		
+		int choice,data;
+		while(true) {
+			
+			System.out.println("****** Menu ******");
+			System.out.println("1: Push an element");
+			System.out.println("2: Pop an element");
+			System.out.println("3: Peek element");
+			System.out.println("4: Display all element");
+			System.out.println("5: Quit");
+			System.out.println("Enter your choice");
+			choice=sc.nextInt();
+			
+			if(choice==5)
+				break;
+			
+			switch(choice) {
+			
+			case 1: System.out.println("Enter the element to be inserted");
+			        data=sc.nextInt();
+			        sList.push(data);
+			        break;
+			        
+			case 2: sList.pop();
+			        break;
+			        
+			case 3: System.out.println("Top element is: "+sList.peek());
+			        break;
+			        
+			case 4: sList.display();
+			        break;
+			        
+			default: System.out.println("Invalid choice");
+			}
+		}
+		
+	}
+	
+}
