@@ -167,9 +167,13 @@ class SingleLinked{
 			System.out.println("8: Display List");
 			System.out.println("9: Count node");
 			System.out.println("10: Reverse a linked list");
+			System.out.println("11: Quit");
 			System.out.println("Enter your choice");
 			choice=sc.nextInt();
 	        
+		        if(choice==11)
+				break;
+				
 			switch(choice) {
 			
 			case 1: System.out.println("Enter node to be inserted");
