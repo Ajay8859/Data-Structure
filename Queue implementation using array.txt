@@ -1,0 +1,126 @@
+import java.io.*;
+import java.util.*;
+class Queue{
+	
+	int[] queueArray;
+	int front,rear;
+	
+	public Queue(int size) {
+		queueArray=new int[size];
+		front=-1;
+		rear=-1;
+	}
+	
+	//Queue is Full
+	public boolean isFull() {
+		return (rear==queueArray.length-1);
+	}
+	
+	//Queue is Empty
+	public boolean isEmpty() {
+		return (front==-1||front==rear+1);
+	}
+	
+	//Insert element 
+	public void insert(int data) {
+		
+		if(isFull()) {
+			System.out.println("Queue Overflow");
+		    return ;
+		}
+		
+		if(front==-1)
+			front=0;
+		rear++;
+		queueArray[rear]=data;
+	}
+	
+	
+	//Delete an element
+	public void delete() {
+		
+		if(isEmpty()) {
+			System.out.println("Queue Underflow");
+			return ;
+		}
+		front++;
+	}
+	
+	//Rear element
+	public int rear() {
+		
+		if(isEmpty()) {
+			System.out.println("Queue is Underflow ");
+			return -1;
+		}
+			
+			return queueArray[rear];
+		
+	}
+	
+	//Display Method
+	public void display() {
+		
+		if(isEmpty()) {
+			System.out.println("Queue Underflow");
+			return ;
+		}
+		
+		System.out.println("Queue is: ");
+		for(int i=front;i<=rear;i++) {
+			
+			System.out.print(queueArray[i]+" ");
+		}
+		System.out.println();
+	}
+	
+	//Main Method
+	public static void main(String args[]) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the size of queue");
+		int n=sc.nextInt();
+		Queue qQueue=new Queue(n);
+		int choice,data;
+		
+		while(true) {
+			
+			
+			System.out.println("****** Menu ******");
+			System.out.println("1: Enqueue");
+			System.out.println("2: Dequeue");
+			System.out.println("3: Display rear element");
+			System.out.println("4: Display all element");
+			System.out.println("5: Quit");
+			System.out.println("Enter your choice");
+			choice=sc.nextInt();
+			
+			
+			if(choice==5)
+				break;
+			
+			switch(choice) {
+			
+			case 1: System.out.println("Enter the element ");
+			        data=sc.nextInt();
+			        qQueue.insert(data);
+			        break;
+			        
+			case 2: qQueue.delete();
+			        break;
+			        
+			case 3: System.out.println("Peek element is: "+qQueue.rear());
+			        break;
+			        
+			case 4: qQueue.display();
+			        break;
+			        
+			default: System.out.println("Invalid choice");
+			         
+			}
+			
+		}
+		
+		
+	}
+	
+}
