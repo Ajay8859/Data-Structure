@@ -1,0 +1,112 @@
+import java.io.*;
+import java.util.*;
+class Queue{
+	
+	class Node{
+		
+		int data;
+		Node link;
+		public Node(int data) {
+			this.data=data;
+			this.link=null;
+		}
+	}
+	Node p=null;
+	Node start=null;
+	
+	//Inserting an element
+	public void insert(int data) {
+		
+		Node temp=new Node(data);
+		
+		if(start==null) {
+			
+			start=temp;
+			p=temp;
+		}
+		p.link=temp;
+		p=temp;
+	}
+	
+	//Delete an element
+	public void delete() {
+		
+		if(start==null) {
+			System.out.println("Empty");
+			return;
+		}
+		start=start.link;
+	}
+	
+	//Top element 
+	public int peek() {
+		
+		if(start==null) {
+			System.out.println("Empty");
+			return -1;
+		}
+		 p=start;
+		while(p.link!=null) {
+			p=p.link;
+		}
+		return p.data;
+	}
+	//Display
+	public void display() {
+		
+		if(start==null) {
+			System.out.println("Empty");
+			
+			return;
+		}
+		Node p=start;
+		while(p!=null) {
+			System.out.print(p.data+" ");
+			p=p.link;
+		}
+		System.out.println();
+	}
+	
+	//Main Method
+	public static void main(String args[]) {
+		
+		Scanner sc=new Scanner(System.in);
+		Queue sList=new Queue();
+		int choice,data;
+		
+		while(true) {
+			
+			System.out.println("****** Menu ******");
+			System.out.println("1: Enqueue");
+			System.out.println("2: Dequeue");
+			System.out.println("3: Peek element");
+			System.out.println("4: Display all element");
+			System.out.println("5: Quit");
+			System.out.println("Enter your choice");
+			choice=sc.nextInt();
+			
+			if(choice==5)
+				break;
+			
+			switch(choice) {
+			
+			case 1: System.out.println("Enter the element ");
+			        data=sc.nextInt();
+			        sList.insert(data);
+			        break;
+			        
+			case 2: sList.delete();
+			        break;
+			        
+			case 3: System.out.println("Peek element is: "+sList.peek());
+			        break;
+			        
+			case 4: sList.display();
+			        break;
+			        
+			}
+			
+		}
+		
+	}
+}
